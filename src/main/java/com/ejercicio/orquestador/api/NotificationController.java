@@ -15,7 +15,7 @@ public class NotificationController {
     private final NotificationService service;
 
     @PostMapping("/preview")
-    public ResponseEntity<String> preview(@Valid @RequestBody PreviewRequest req) {
+    public ResponseEntity<PreviewResponse> preview(@Valid @RequestBody PreviewRequest req) {
         return ResponseEntity.ok(service.preview(req));
     }
 

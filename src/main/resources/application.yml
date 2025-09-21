@@ -2,13 +2,14 @@ spring:
   data:
     mongodb:
       uri: mongodb://localhost:27017/notifs
+      auto-index-creation: true
 
   mail:
     host: localhost
     port: 1025
     properties:
-      mail.smtp.auth: false
-      mail.smtp.starttls.enable: false
+      "[mail.smtp.auth]": false
+      "[mail.smtp.starttls.enable]": false
 
 app:
   mail:

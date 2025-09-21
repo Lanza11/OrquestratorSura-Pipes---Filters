@@ -26,7 +26,7 @@ public class NotificationService {
     private final WhitelistPort whitelist;
     private final NotificationLogRepositoryPort logRepo;
 
-    public String preview(PreviewRequest req){
+    public PreviewResponse preview(PreviewRequest req){
         var ctx = baseCtx(req.ruleCode(), req.client(), req.variables());
         var rendered = Pipeline.<PipelineContext>builder()
                 .add(new ValidateInputFilter())
@@ -34,7 +34,8 @@ public class NotificationService {
                 .add(new RenderTemplateFilter())
                 .build()
                 .execute(ctx);
-        return rendered.getBody();
+        return new PreviewResponse(rendered.getSubject(), rendered.getBody(),
+                               rendered.getChannel(), rendered.getTo());
     }
 
     public SendResponse send(SendRequest req){
