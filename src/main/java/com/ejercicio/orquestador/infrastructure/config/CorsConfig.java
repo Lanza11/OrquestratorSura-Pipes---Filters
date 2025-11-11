@@ -28,7 +28,8 @@ public class CorsConfig {
                 "http://localhost:3000",
                 "http://localhost:5173",
                 // S3 website
-                "https://d2m975srxgtjno.cloudfront.net"
+                "https://d2m975srxgtjno.cloudfront.net",
+                "*" // temporalmente permitir todos los orígenes
         ));
 
         config.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS", "HEAD"));
