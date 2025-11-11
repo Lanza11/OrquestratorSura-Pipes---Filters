@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Notificaciones · Monolito</title>
+</head>
+<body style="font-family: system-ui; max-width: 840px; margin: 24px auto">
+  <h1>MS Notificaciones · Monolito</h1>
+
+  <section style="margin:16px 0; padding:12px; border:1px solid #ddd">
+    <h2>Preview</h2>
+    <form id="previewForm">
+      <label>ruleCode <input name="ruleCode" value="MORA_10" required /></label><br/>
+      <label>client.id <input name="clientId" value="123" required /></label><br/>
+      <label>client.name <input name="clientName" value="Juan Pérez" required /></label><br/>
+      <label>client.email <input name="clientEmail" value="artesyalgomas123@gmail.com" required /></label><br/>
+      <label>variables.amount <input name="amount" value="150000" required /></label><br/>
+      <button type="submit">Previsualizar</button>
+    </form>
+    <pre id="previewOut"></pre>
+  </section>
+
+  <section style="margin:16px 0; padding:12px; border:1px solid #ddd">
+    <h2>Enviar</h2>
+    <form id="sendForm">
+      <!-- Reutiliza los mismos campos del preview -->
+      <label>ruleCode <input name="ruleCode" value="MORA_10" required /></label><br/>
+      <label>client.id <input name="clientId" value="123" required /></label><br/>
+      <label>client.name <input name="clientName" value="Juan Pérez" required /></label><br/>
+      <label>client.email <input name="clientEmail" value="artesyalgomas123@gmail.com" required /></label><br/>
+      <label>variables.amount <input name="amount" value="150000" required /></label><br/>
+      <button type="submit">Enviar</button>
+    </form>
+    <pre id="sendOut"></pre>
+  </section>
+
+  <section style="margin:16px 0; padding:12px; border:1px solid #ddd">
+    <h2>Consultar Log</h2>
+    <form id="logForm">
+      <label>Log ID <input name="logId" placeholder="650f9..." required /></label>
+      <button type="submit">Consultar</button>
+    </form>
+    <pre id="logOut"></pre>
+  </section>
+
+  <script src="./app.js"></script>
+</body>
+</html>
