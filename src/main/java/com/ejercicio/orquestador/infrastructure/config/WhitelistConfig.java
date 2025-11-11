@@ -11,6 +11,10 @@ import java.util.List;
 @ConfigurationProperties(prefix = "app.mail")
 class WhitelistProps {
     private List<String> allowedRecipients;
+    private boolean enabled = false; // si true, se aplica la whitelist; si false, se acepta cualquier email
+
+    public boolean isEnabled() { return enabled; }
+    public void setEnabled(boolean enabled) { this.enabled = enabled; }
     public List<String> getAllowedRecipients() { return allowedRecipients; }
     public void setAllowedRecipients(List<String> allowedRecipients) { this.allowedRecipients = allowedRecipients; }
 }
@@ -23,7 +27,13 @@ public class WhitelistConfig implements WhitelistPort {
 
     @Override
     public boolean isAllowed(String email) {
-        return props.getAllowedRecipients()!=null && props.getAllowedRecipients().stream()
-                .anyMatch(e -> e.equalsIgnoreCase(email));
+        // Si la whitelist no está habilitada, aceptar cualquier email (modo abierto)
+        if (props == null || !props.isEnabled()) return true;
+
+        // Si está habilitada pero no hay destinatarios configurados, denegar por seguridad
+        var list = props.getAllowedRecipients();
+        if (list == null || list.isEmpty()) return false;
+
+        return list.stream().anyMatch(e -> e.equalsIgnoreCase(email));
     }
 }

@@ -13,10 +13,6 @@ spring:
 
 app:
   mail:
-    allowedRecipients:
-      - artesyalgomas123@gmail.com
-      - mateo.vasquezg@udea.edu.co
-      - correo1@demo.com
   security:
     jwt:
       secret: "supersecretkey1234567890"
