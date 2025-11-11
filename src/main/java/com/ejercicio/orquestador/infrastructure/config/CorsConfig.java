@@ -19,7 +19,7 @@ public class CorsConfig {
     UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
     CorsConfiguration config = new CorsConfiguration();
 
-    // Opción simple (sin cookies):
+    // Si no usas cookies, deja false (más simple)
     config.setAllowCredentials(false);
 
     config.setAllowedOrigins(Arrays.asList(
@@ -36,5 +36,6 @@ public class CorsConfig {
     return new CorsFilter(source);
   }
 }
+
 
 
