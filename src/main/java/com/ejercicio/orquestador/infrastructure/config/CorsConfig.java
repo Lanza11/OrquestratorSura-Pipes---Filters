@@ -15,29 +15,28 @@ import java.util.Arrays;
 @Configuration
 public class CorsConfig {
 
-    @Bean
-    public CorsFilter corsFilter() {
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        CorsConfiguration config = new CorsConfiguration();
+  @Bean
+  public CorsFilter corsFilter() {
+    UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+    CorsConfiguration config = new CorsConfiguration();
 
-        // Permitir credenciales si fuera necesario
-        config.setAllowCredentials(true);
+    // Opción A: sin credenciales (simple y segura)
+    config.setAllowCredentials(false);
 
-        // Orígenes permitidos: ajustar aquí con tu dominio S3/CloudFront
-        config.setAllowedOrigins(Arrays.asList(
-                "http://localhost:3000",
-                "http://localhost:5173",
-                // S3 website
-                "https://d2m975srxgtjno.cloudfront.net",
-                "*" // temporalmente permitir todos los orígenes
-        ));
+    // Pon SOLO tu dominio del front (CloudFront)
+    config.setAllowedOrigins(Arrays.asList(
+        "https://d3lmge1sw1cu5p.cloudfront.net",
+        "http://localhost:5173",
+        "http://localhost:3000"
+    ));
 
-        config.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS", "HEAD"));
-        config.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type", "Accept", "Origin", "X-Requested-With"));
-        config.setExposedHeaders(Arrays.asList("Authorization", "Content-Type", "Content-Length"));
-        config.setMaxAge(3600L);
+    config.setAllowedMethods(Arrays.asList("GET","POST","OPTIONS","PUT","DELETE","HEAD"));
+    config.setAllowedHeaders(Arrays.asList("*"));
+    config.setExposedHeaders(Arrays.asList("Content-Type","Authorization","Content-Length"));
+    config.setMaxAge(3600L);
 
-        source.registerCorsConfiguration("/**", config);
-        return new CorsFilter(source);
-    }
+    source.registerCorsConfiguration("/**", config);
+    return new CorsFilter(source);
+  }
 }
+
