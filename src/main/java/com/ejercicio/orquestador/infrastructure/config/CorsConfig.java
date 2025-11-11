@@ -14,22 +14,19 @@ import java.util.Arrays;
  */
 @Configuration
 public class CorsConfig {
-
   @Bean
   public CorsFilter corsFilter() {
     UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
     CorsConfiguration config = new CorsConfiguration();
 
-    // Opción A: sin credenciales (simple y segura)
+    // Opción simple (sin cookies):
     config.setAllowCredentials(false);
 
-    // Pon SOLO tu dominio del front (CloudFront)
     config.setAllowedOrigins(Arrays.asList(
-        "https://d3lmge1sw1cu5p.cloudfront.net",
-        "http://localhost:5173",
-        "http://localhost:3000"
+      "https://d3lmge1sw1cu5p.cloudfront.net",
+      "http://localhost:5173",
+      "http://localhost:3000"
     ));
-
     config.setAllowedMethods(Arrays.asList("GET","POST","OPTIONS","PUT","DELETE","HEAD"));
     config.setAllowedHeaders(Arrays.asList("*"));
     config.setExposedHeaders(Arrays.asList("Content-Type","Authorization","Content-Length"));
@@ -39,4 +36,5 @@ public class CorsConfig {
     return new CorsFilter(source);
   }
 }
+
 
