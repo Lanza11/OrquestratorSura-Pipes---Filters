@@ -1,48 +1,352 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Notificaciones · Monolito</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>📬 MS Notificaciones - Panel de Control</title>
+  <link rel="stylesheet" href="./style.css">
 </head>
-<body style="font-family: system-ui; max-width: 840px; margin: 24px auto">
-  <h1>MS Notificaciones · Monolito</h1>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="container">
+      <div class="header-content">
+        <h1 class="header-title">
+          <span class="icon">📬</span>
+          MS Notificaciones
+        </h1>
+        <p class="header-subtitle">Sistema de Notificaciones con Pipes & Filters</p>
+      </div>
+      <div class="header-status">
+        <span class="status-badge" id="statusBadge">
+          <span class="status-dot"></span>
+          Sistema Activo
+        </span>
+      </div>
+    </div>
+  </header>
 
-  <section style="margin:16px 0; padding:12px; border:1px solid #ddd">
-    <h2>Preview</h2>
-    <form id="previewForm">
-      <label>ruleCode <input name="ruleCode" value="MORA_10" required /></label><br/>
-      <label>client.id <input name="clientId" value="123" required /></label><br/>
-      <label>client.name <input name="clientName" value="Juan Pérez" required /></label><br/>
-      <label>client.email <input name="clientEmail" value="artesyalgomas123@gmail.com" required /></label><br/>
-      <label>variables.amount <input name="amount" value="150000" required /></label><br/>
-      <button type="submit">Previsualizar</button>
-    </form>
-    <pre id="previewOut"></pre>
-  </section>
+  <!-- Main Content -->
+  <main class="container">
+    
+    <!-- Tabs Navigation -->
+    <div class="tabs">
+      <button class="tab-button active" data-tab="preview">
+        <span class="tab-icon">👁️</span>
+        Preview
+      </button>
+      <button class="tab-button" data-tab="send">
+        <span class="tab-icon">📤</span>
+        Enviar
+      </button>
+      <button class="tab-button" data-tab="logs">
+        <span class="tab-icon">📋</span>
+        Consultar Log
+      </button>
+    </div>
 
-  <section style="margin:16px 0; padding:12px; border:1px solid #ddd">
-    <h2>Enviar</h2>
-    <form id="sendForm">
-      <!-- Reutiliza los mismos campos del preview -->
-      <label>ruleCode <input name="ruleCode" value="MORA_10" required /></label><br/>
-      <label>client.id <input name="clientId" value="123" required /></label><br/>
-      <label>client.name <input name="clientName" value="Juan Pérez" required /></label><br/>
-      <label>client.email <input name="clientEmail" value="artesyalgomas123@gmail.com" required /></label><br/>
-      <label>variables.amount <input name="amount" value="150000" required /></label><br/>
-      <button type="submit">Enviar</button>
-    </form>
-    <pre id="sendOut"></pre>
-  </section>
+    <!-- Tab Content: Preview -->
+    <div class="tab-content active" id="preview">
+      <div class="card">
+        <div class="card-header">
+          <h2 class="card-title">Previsualizar Notificación</h2>
+          <p class="card-description">Simula el contenido del mensaje sin enviarlo</p>
+        </div>
+        <div class="card-body">
+          <form id="previewForm" class="form">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="previewRuleCode" class="form-label">
+                  Código de Regla
+                  <span class="label-hint">Ej: MORA_10</span>
+                </label>
+                <input 
+                  type="text" 
+                  id="previewRuleCode"
+                  name="ruleCode" 
+                  class="form-input" 
+                  value="MORA_10" 
+                  required 
+                  placeholder="MORA_10"
+                />
+              </div>
+            </div>
 
-  <section style="margin:16px 0; padding:12px; border:1px solid #ddd">
-    <h2>Consultar Log</h2>
-    <form id="logForm">
-      <label>Log ID <input name="logId" placeholder="650f9..." required /></label>
-      <button type="submit">Consultar</button>
-    </form>
-    <pre id="logOut"></pre>
-  </section>
+            <div class="form-section">
+              <h3 class="form-section-title">Información del Cliente</h3>
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="previewClientId" class="form-label">ID Cliente</label>
+                  <input 
+                    type="text" 
+                    id="previewClientId"
+                    name="clientId" 
+                    class="form-input" 
+                    value="123" 
+                    required 
+                    placeholder="123"
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="previewClientName" class="form-label">Nombre Completo</label>
+                  <input 
+                    type="text" 
+                    id="previewClientName"
+                    name="clientName" 
+                    class="form-input" 
+                    value="Juan Pérez" 
+                    required 
+                    placeholder="Juan Pérez"
+                  />
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="previewClientEmail" class="form-label">Email</label>
+                  <input 
+                    type="email" 
+                    id="previewClientEmail"
+                    name="clientEmail" 
+                    class="form-input" 
+                    value="artesyalgomas123@gmail.com" 
+                    required 
+                    placeholder="correo@ejemplo.com"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div class="form-section">
+              <h3 class="form-section-title">Variables de la Plantilla</h3>
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="previewAmount" class="form-label">
+                    Monto
+                    <span class="label-hint">Usado en la plantilla como {{amount}}</span>
+                  </label>
+                  <input 
+                    type="text" 
+                    id="previewAmount"
+                    name="amount" 
+                    class="form-input" 
+                    value="150000" 
+                    required 
+                    placeholder="150000"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div class="form-actions">
+              <button type="submit" class="btn btn-primary">
+                <span class="btn-icon">👁️</span>
+                Previsualizar Mensaje
+              </button>
+              <button type="button" class="btn btn-secondary" onclick="document.getElementById('previewForm').reset()">
+                <span class="btn-icon">🔄</span>
+                Limpiar
+              </button>
+            </div>
+          </form>
+
+          <div id="previewResult" class="result-container hidden">
+            <div class="result-header">
+              <h3 class="result-title">Resultado</h3>
+              <button class="btn-close" onclick="document.getElementById('previewResult').classList.add('hidden')">✕</button>
+            </div>
+            <pre id="previewOut" class="result-output"></pre>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tab Content: Send -->
+    <div class="tab-content" id="send">
+      <div class="card">
+        <div class="card-header">
+          <h2 class="card-title">Enviar Notificación</h2>
+          <p class="card-description">Envía el mensaje por email y registra el log</p>
+        </div>
+        <div class="card-body">
+          <form id="sendForm" class="form">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="sendRuleCode" class="form-label">
+                  Código de Regla
+                  <span class="label-hint">Ej: MORA_10</span>
+                </label>
+                <input 
+                  type="text" 
+                  id="sendRuleCode"
+                  name="ruleCode" 
+                  class="form-input" 
+                  value="MORA_10" 
+                  required 
+                  placeholder="MORA_10"
+                />
+              </div>
+            </div>
+
+            <div class="form-section">
+              <h3 class="form-section-title">Información del Cliente</h3>
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="sendClientId" class="form-label">ID Cliente</label>
+                  <input 
+                    type="text" 
+                    id="sendClientId"
+                    name="clientId" 
+                    class="form-input" 
+                    value="123" 
+                    required 
+                    placeholder="123"
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="sendClientName" class="form-label">Nombre Completo</label>
+                  <input 
+                    type="text" 
+                    id="sendClientName"
+                    name="clientName" 
+                    class="form-input" 
+                    value="Juan Pérez" 
+                    required 
+                    placeholder="Juan Pérez"
+                  />
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="sendClientEmail" class="form-label">
+                    Email
+                    <span class="label-hint">⚠️ Solo emails en whitelist</span>
+                  </label>
+                  <input 
+                    type="email" 
+                    id="sendClientEmail"
+                    name="clientEmail" 
+                    class="form-input" 
+                    value="artesyalgomas123@gmail.com" 
+                    required 
+                    placeholder="correo@ejemplo.com"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div class="form-section">
+              <h3 class="form-section-title">Variables de la Plantilla</h3>
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="sendAmount" class="form-label">
+                    Monto
+                    <span class="label-hint">Usado en la plantilla como {{amount}}</span>
+                  </label>
+                  <input 
+                    type="text" 
+                    id="sendAmount"
+                    name="amount" 
+                    class="form-input" 
+                    value="150000" 
+                    required 
+                    placeholder="150000"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div class="alert alert-info">
+              <strong>ℹ️ Nota:</strong> El email se enviará a través de Mailhog (puerto 1025). 
+              Puedes ver los mensajes en <a href="http://localhost:8025" target="_blank" class="alert-link">http://localhost:8025</a>
+            </div>
+
+            <div class="form-actions">
+              <button type="submit" class="btn btn-success">
+                <span class="btn-icon">📤</span>
+                Enviar Notificación
+              </button>
+              <button type="button" class="btn btn-secondary" onclick="document.getElementById('sendForm').reset()">
+                <span class="btn-icon">🔄</span>
+                Limpiar
+              </button>
+            </div>
+          </form>
+
+          <div id="sendResult" class="result-container hidden">
+            <div class="result-header">
+              <h3 class="result-title">Resultado</h3>
+              <button class="btn-close" onclick="document.getElementById('sendResult').classList.add('hidden')">✕</button>
+            </div>
+            <pre id="sendOut" class="result-output"></pre>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tab Content: Logs -->
+    <div class="tab-content" id="logs">
+      <div class="card">
+        <div class="card-header">
+          <h2 class="card-title">Consultar Log de Notificación</h2>
+          <p class="card-description">Busca el registro de una notificación enviada por su ID</p>
+        </div>
+        <div class="card-body">
+          <form id="logForm" class="form">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="logId" class="form-label">
+                  ID del Log
+                  <span class="label-hint">ID generado al enviar una notificación</span>
+                </label>
+                <input 
+                  type="text" 
+                  id="logId"
+                  name="logId" 
+                  class="form-input" 
+                  required 
+                  placeholder="650f9a1b2c3d4e5f6a7b8c9d"
+                />
+              </div>
+            </div>
+
+            <div class="form-actions">
+              <button type="submit" class="btn btn-primary">
+                <span class="btn-icon">🔍</span>
+                Buscar Log
+              </button>
+              <button type="button" class="btn btn-secondary" onclick="document.getElementById('logForm').reset()">
+                <span class="btn-icon">🔄</span>
+                Limpiar
+              </button>
+            </div>
+          </form>
+
+          <div id="logResult" class="result-container hidden">
+            <div class="result-header">
+              <h3 class="result-title">Resultado</h3>
+              <button class="btn-close" onclick="document.getElementById('logResult').classList.add('hidden')">✕</button>
+            </div>
+            <pre id="logOut" class="result-output"></pre>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <p class="footer-text">
+        MS Notificaciones - Arquitectura Hexagonal con Pipes & Filters
+      </p>
+      <p class="footer-links">
+        <a href="/swagger-ui.html" target="_blank" class="footer-link">📚 API Docs</a>
+        <a href="http://localhost:8025" target="_blank" class="footer-link">📧 Mailhog</a>
+        <a href="/ping" target="_blank" class="footer-link">🏥 Health Check</a>
+      </p>
+    </div>
+  </footer>
 
   <script src="./app.js"></script>
 </body>
