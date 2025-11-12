@@ -26,7 +26,7 @@ public class CorsConfig {
 
     // Usa patrones o lista explícita, pero sin "*"
     config.setAllowedOriginPatterns(Arrays.asList(
-        "https://d3lmqelsw1cu5p.cloudfront.net",
+        "https://d30qjeh9w9mr7p.cloudfront.net",
         "http://localhost:3000",
         "http://localhost:5173"
     ));
