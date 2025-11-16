@@ -1,0 +1,78 @@
+{
+	"info": {
+		"_postman_id": "f660e39c-3057-4c46-93ef-4aa722100c0e",
+		"name": "AWS - Arqui Soft",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "24116174"
+	},
+	"item": [
+		{
+			"name": "Policies",
+			"item": [
+				{
+					"name": "OBTENER POLIZAS",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "https://2yhcsj1fr2.execute-api.us-west-2.amazonaws.com/prod/policies"
+					},
+					"response": []
+				},
+				{
+					"name": "OBTENER POLIZA POR ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "https://2yhcsj1fr2.execute-api.us-west-2.amazonaws.com/prod/policies/POL-002"
+					},
+					"response": []
+				},
+				{
+					"name": "CREAR POLIZA",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"clientName\": \"Pedro Ramírez\",\r\n    \"policyType\": \"Salud\",\r\n    \"premium\": 45000,\r\n    \"status\": \"Activa\",\r\n    \"startDate\": \"2024-11-15\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "https://2yhcsj1fr2.execute-api.us-west-2.amazonaws.com/prod/policies"
+					},
+					"response": []
+				},
+				{
+					"name": "ELIMINAR POLIZA",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": "https://2yhcsj1fr2.execute-api.us-west-2.amazonaws.com/prod/policies/POL-004"
+					},
+					"response": []
+				},
+				{
+					"name": "ACTUALIZAR POLIZA",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"status\": \"Cancelada\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "https://2yhcsj1fr2.execute-api.us-west-2.amazonaws.com/prod/policies/POL-003"
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
