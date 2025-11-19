@@ -40,7 +40,7 @@ Swagger es una herramienta de documentación interactiva para APIs REST que perm
 1. Abre tu navegador web
 2. Ve a la URL: **https://editor.swagger.io**
 3. Espera a que cargue el editor
-4. Desde el repositorio descarga el archivo `PoliciesAPI-swagger.json` ubicado en la carpeta `docs/`
+4. Desde el repositorio descarga el archivo `NotificationsAPI-prod-swagger.json` ubicado en la carpeta `docs/`
 
 #### **Paso 2: Importar el archivo JSON**
 
